@@ -1,0 +1,27 @@
+AXISY = 1000;
+BNDINF = 1001;
+DISK = 1002;
+DOMAIN1 = 1003;
+DOMAIN2 = 1004;
+INFY1 = 1005;
+INFY2 = 1006;
+INFX1 = 1007;
+INFX2 = 1008;
+
+step = 0.03;
+disk_step = step/5;
+division_step = step/3;
+inf_step = step;
+disk_radius = 0.25;
+disk_y = 0.25;
+x_min = 0;
+x_max = 2;
+y_max = 1;
+y_min = -y_max;
+x_width = 1;
+y_width = 0.5;
+
+phi = 10;
+eps1 = 5;
+eps2 = 1;
+
