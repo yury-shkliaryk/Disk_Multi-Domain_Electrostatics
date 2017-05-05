@@ -23,5 +23,5 @@ y_width = 0.5;
 
 phi = 10;
 eps1 = 1;
-eps2 = 5;
+eps2 = 1;
 

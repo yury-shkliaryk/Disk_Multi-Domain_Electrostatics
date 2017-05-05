@@ -11,6 +11,7 @@ Group
     InfX = Region[{INFX1, INFX2}];
     InfY = Region[{INFY1, INFY2}];
     OmegaTotal = Region[{Omega,GamaDirichlet1,GamaDirichlet2,GamaNeumann}];
+    RealOmega = Region[{DOMAIN1, DOMAIN2}];
 }
 
 Jacobian {
@@ -76,6 +77,11 @@ Function
     eps[Omega2] = eps2;
 }
 
+Function
+{
+    analytic_potential[Omega] = 2*phi/Pi*Atan[Sqrt[2]*disk_radius/Sqrt[$X^2+($Y-disk_y)^2-disk_radius^2+Sqrt[($X^2+($Y-disk_y)^2-disk_radius^2)^2+(2*disk_radius*($Y-disk_y))^2]]];
+}
+
 Formulation
 {
     {
@@ -110,6 +116,7 @@ PostProcessing{
   {Name DiskPotential; NameOfFormulation DiskPotential;
     Quantity{
       {Name u; Value {Local{[{u}]; In Omega; Jacobian JVol;}}}
+      {Name analytic_potential; Value {Local{[analytic_potential[]]; In Omega; Jacobian JVol;}}}
     }
   }
 }
@@ -118,7 +125,9 @@ PostOperation{
   {Name Map_u; NameOfPostProcessing DiskPotential;
     Operation{
       Print[u, OnElementsOf Omega, File "u.pos"];
+      Print[analytic_potential, OnElementsOf Omega, File "analytic_potential.pos"];
     }
   }
 }
 
+// y derivative of atan ( sqrt(2) R / sqrt ( (x^2+(y-Y)^2 - R^2)+sqrt( (x^2+(y-Y)^2-R^2)^2+(2 R y)^2) ) ) at y=0
